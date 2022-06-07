@@ -1,20 +1,31 @@
 # lazyload-gfonts
 
-An util for lazy load Google Fonts
-
-This project is created by [create-a-typescript-lib](https://github.com/backrunner/create-a-typescript-lib).
+An util for lazy loading Google Fonts.
 
 ## Usage
 
-To build this project, you can run this command:
+Step 1: Install this package
 
 ```bash
-npm run build
+$ npm install lazyload-gfonts
 ```
 
-Also, you can use `npm run watch` to start a file changes.
+Step 2: Use it as a normal method
 
-All changes you make will immediately trigger compilation and take effect on the generated script.
+```ts
+import { lazyloadGoogleFonts } from 'lazyload-gfonts';
+
+lazyloadGoogleFonts({
+  fontFamily: 'Noto Sans SC',
+  fontWeight: [400, 500],
+  display: 'swap',
+  apiHost: '', // You can specify the host of Google Font API for special usage.
+});
+
+// or you can directly pass an url to it
+
+lazyloadGoogleFonts('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500');
+```
 
 ## License
 

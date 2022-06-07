@@ -7,7 +7,16 @@ import filesize from 'rollup-plugin-filesize';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
-const plugins = [json(), resolve(), commonjs(), typescript({ useTsconfigDeclarationDir: true }), sourceMaps()];
+const plugins = [
+  json(),
+  resolve({
+    preferBuiltins: false,
+    browser: true,
+  }),
+  commonjs(),
+  typescript({ useTsconfigDeclarationDir: true }),
+  sourceMaps(),
+];
 
 if (process.env.NODE_ENV === 'production') {
   plugins.push(filesize({ showMinifiedSize: false, showBrotliSize: true }), terser());
