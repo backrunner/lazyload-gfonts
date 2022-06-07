@@ -33,12 +33,17 @@ export const getGoogleFontUrl = (options: GoogleFontsOptions) => {
   return `https://${apiHost}/css2?${fontFamily.slice(1)}${fontWeight}${display}`;
 };
 
-export const lazyloadGoogleFonts = (url: string | GoogleFontsOptions) => {
+export const lazyloadGoogleFonts = (url: string | GoogleFontsOptions, force = false) => {
   if (typeof url === 'string' && (!url.includes('https://') || !url.includes('css2?'))) {
-    throw new TypeError('Invalid Google Font stylesheet url.');
+    throw new TypeError('Invalid Google Fonts stylesheet url.');
+  }
+  if (document.querySelector('#lazyload-gfont') && !force) {
+    console.warn('Google fonts has been loaded.');
+    return;
   }
   const cssUrl = typeof url === 'string' ? url : getGoogleFontUrl(url);
   const cssEl = document.createElement('link');
+  cssEl.id = 'lazyload-gfont';
   cssEl.href = cssUrl;
   cssEl.rel = 'stylesheet';
   cssEl.type = 'text/css';
